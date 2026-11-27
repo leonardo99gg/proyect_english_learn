@@ -5,11 +5,21 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model Card {
+  id              Int      @id @default(autoincrement())
+  wordOrPhrase    String
+  translation     String
+  exampleSentence String?
+  grammarNote     String?
+  level           Int      @default(1)
+  nextReview      DateTime @default(now())
+  createdAt       DateTime @default(now())
 }
